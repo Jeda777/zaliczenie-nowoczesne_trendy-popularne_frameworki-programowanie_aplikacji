@@ -8,6 +8,8 @@ require_once __DIR__ . '/src/config/database.php';
 require_once __DIR__ . '/src/Utils/Router.php';
 require_once __DIR__ . '/src/Controllers/MessageController.php';
 require_once __DIR__ . '/src/Models/Message.php';
+require_once __DIR__ . '/src/Controllers/UserController.php';
+require_once __DIR__ . '/src/Models/User.php';
 
 header('Content-Type: application/json');
 
@@ -23,6 +25,18 @@ $router->addRoute('GET', '/api/message', function() {
 $router->addRoute('POST', '/api/message', function() {
     $messageController = new MessageController();
     $messageController->createMessage();
+});
+
+// POST /api/user/login
+$router->addRoute('POST', '/api/user/login', function() {
+    $userController = new UserController();
+    $userController->login();
+});
+
+// POST /api/user/register
+$router->addRoute('POST', '/api/user/register', function() {
+    $userController = new UserController();
+    $userController->register();
 });
 
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

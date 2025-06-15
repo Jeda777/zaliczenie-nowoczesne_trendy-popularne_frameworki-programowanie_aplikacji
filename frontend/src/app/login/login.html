@@ -1,0 +1,15 @@
+<form [formGroup]="form" id="form" (submit)="submitForm()">
+  <input
+    type="text"
+    id="username"
+    placeholder="username"
+    formControlName="username"
+  />
+  <input
+    type="text"
+    id="password"
+    placeholder="password"
+    formControlName="password"
+  />
+</form>
+<button type="submit" form="form">Login/Register</button>

@@ -1,0 +1,21 @@
+<div class="info">
+  Nie chciało mi się robić web socketów w php, a php użyłem, żeby zaliczyć
+  więcej przedmiotów na raz więc nie jest real time.
+</div>
+<div class="messages" *ngIf="messages.length > 0">
+  <div *ngFor="let msg of messages" data-id="{{msg.id}}">
+    <p>{{msg.username}} {{msg.timestamp * 1000 | date:'short'}}</p>
+    <p>{{msg.content}}</p>
+  </div>
+</div>
+<div class="form">
+  <form [formGroup]="form" id="form" (submit)="submitForm()">
+    <input
+      type="text"
+      id="message"
+      placeholder="message"
+      formControlName="message"
+    />
+  </form>
+  <button type="submit" form="form">Send</button>
+</div>

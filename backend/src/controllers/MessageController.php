@@ -23,14 +23,19 @@ class MessageController
             return;
         }
 
-        if (!isset($data['username']) || !isset($data['message'])) {
+        if (!isset($data['userId']) || !isset($data['message'])) {
             http_response_code(400);
-            echo json_encode(['info' => 'Username and message are required']);
+            echo json_encode(['info' => 'User ID and message are required']);
             return;
         }
 
-        $message = $this->messageModel->create($data);
-        $message = $this->messageModel->findById($message);
+        $messageId = $this->messageModel->create($data);
+        if (!$messageId) {
+            http_response_code(500);
+            echo json_encode(['info' => 'Failed to create message']);
+            return;
+        }
+        $message = $this->messageModel->findById($messageId);
         if ($message) {
             http_response_code(201);
             echo json_encode(['info' => 'Message created successfully', 'message' => $message]);
